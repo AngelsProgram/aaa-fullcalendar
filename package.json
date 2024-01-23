@@ -1,0 +1,27 @@
+{
+  "name": "@aaa-project-full/aaa-fullcalendar",
+  "version": "1.0.0",
+  "description": "Full Calendar and Events.",
+  "main": "index.js",
+  "keywords": [
+    "calendar",
+    "events"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/react": "^6.1.10",
+    "zzzzz-last-dependencies": "github:AngelsProgram/zzzzz-last-dependency#install"
+  },
+  "devDependencies": {
+    "zzzzz-last-devdependencies": "github:AngelsProgram/zzzzz-last-dependency#install"
+  },
+  "optionalDependencies": {
+    "zzzzz-last-optionaldependencies": "github:AngelsProgram/zzzzz-last-dependency#install"
+  },
+  "peerDependencies": {
+    "zzzzz-last-peerdependencies": "github:AngelsProgram/zzzzz-last-dependency#install"
+  }
+}
