@@ -1,11 +1,11 @@
 "use client";
+
 import React from "react";
 import Fullcalendar_core from "@fullcalendar/core";
 import FullCalendar_react from "@fullcalendar/react";
-import plugin_daygrid from "@fullcalendar/daygrid";
 
 import { plugins } from "./config";
-import { SelectViews } from "./components";
+import { SelectViews, ToggleState } from "./components";
 
 import type { T_view } from "./types";
 
@@ -16,6 +16,11 @@ type TcustomButtons = {
 export default function Page() {
   const ref_calendar = React.useRef<FullCalendar_react>(null!);
   const ref_modal_selectviews = React.useRef<HTMLDialogElement>(null!);
+
+  const [weekends, setWeekends] = React.useState(true);
+  const [navLinks, setNavLinks] = React.useState(false);
+  const [selectable, setSelectable] = React.useState(false);
+  const [editable, setEditable] = React.useState(false);
 
   const initialView: T_view = "dayGridMonth";
 
@@ -49,10 +54,23 @@ export default function Page() {
     <div>
       <dialog ref={ref_modal_selectviews}>
         <h2>Options</h2>
-        <label>
-          View:{" "}
-          <SelectViews ref_calendar={ref_calendar} initialView={initialView} />
-        </label>
+        <div>
+          <label>
+            View:{" "}
+            <SelectViews
+              ref_calendar={ref_calendar}
+              initialView={initialView}
+            />
+          </label>
+        </div>
+        <ToggleState label="Weekends" value={weekends} change={setWeekends} />
+        <ToggleState label="NavLinks" value={navLinks} change={setNavLinks} />
+        <ToggleState
+          label="Selectable"
+          value={selectable}
+          change={setSelectable}
+        />
+        <ToggleState label="Editable" value={editable} change={setEditable} />
         <div>
           <button
             onClick={() => {
@@ -68,6 +86,12 @@ export default function Page() {
         plugins={plugins}
         ref={ref_calendar}
         initialView={initialView}
+        nowIndicator={true}
+        weekends={weekends}
+        navLinks={navLinks}
+        weekNumbers={true}
+        selectable={selectable}
+        editable={editable}
         customButtons={customButtons}
         headerToolbar={headerToolbar}
       />
