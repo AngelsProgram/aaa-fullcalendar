@@ -7,6 +7,9 @@ import plugin_list from "@fullcalendar/list";
 
 import plugin_interaction from "@fullcalendar/interaction";
 
+import plugin_googlecalendar from "@fullcalendar/google-calendar";
+import plugin_icalendar from "@fullcalendar/icalendar";
+
 const plugins_views: Fullcalendar_core.PluginDef[] = [
   plugin_multimonth,
   plugin_daygrid,
@@ -16,9 +19,15 @@ const plugins_views: Fullcalendar_core.PluginDef[] = [
 
 const plugins_moment: Fullcalendar_core.PluginDef[] = [plugin_interaction];
 
+const plugins_calendar: Fullcalendar_core.PluginDef[] = [
+  plugin_googlecalendar,
+  plugin_icalendar,
+];
+
 const plugins: Fullcalendar_core.PluginDef[] = [
   ...plugins_views,
   ...plugins_moment,
+  ...plugins_calendar,
 ];
 
 export { plugins };

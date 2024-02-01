@@ -42,10 +42,23 @@ export default function Page() {
         ref_modal_selectviews.current?.showModal();
       },
     },
+    addEventNow: {
+      text: "AddEventNow",
+      click(ev, element) {
+        try {
+          const api_calendar = ref_calendar.current?.getApi();
+          const event = { start: new Date() };
+          api_calendar.addEvent(event);
+        } catch (error) {}
+      },
+    },
+    addEventInput: {},
+    addEventRange: {},
+    addEventDrag: {},
   };
 
   const headerToolbar: Fullcalendar_core.ToolbarInput = {
-    left: "debug,showStateOptions",
+    left: "debug,showStateOptions,addEventNow",
     center: "title",
     right: "today prevYear,prev,next,nextYear",
   };
