@@ -5,7 +5,9 @@ import Fullcalendar_core from "@fullcalendar/core";
 import FullCalendar_react from "@fullcalendar/react";
 
 import { plugins } from "./config";
-import { SelectViews, ToggleState } from "./components";
+
+import { Context } from "./context";
+import { ModalOptions } from "./components";
 
 import type { T_view } from "./types";
 
@@ -15,14 +17,27 @@ type TcustomButtons = {
 
 export default function Page() {
   const ref_calendar = React.useRef<FullCalendar_react>(null!);
-  const ref_modal_selectviews = React.useRef<HTMLDialogElement>(null!);
+  const ref_modal_options = React.useRef<HTMLDialogElement>(null!);
 
-  const [weekends, setWeekends] = React.useState(true);
-  const [navLinks, setNavLinks] = React.useState(false);
-  const [selectable, setSelectable] = React.useState(false);
-  const [editable, setEditable] = React.useState(false);
+  const state_weekend = React.useState(true);
+  const state_navLinks = React.useState(false);
+  const state_selectable = React.useState(false);
+  const state_editable = React.useState(false);
+
+  const [weekends] = state_weekend;
+  const [navLinks] = state_navLinks;
+  const [selectable] = state_selectable;
+  const [editable] = state_editable;
 
   const initialView: T_view = "dayGridMonth";
+
+  const state_options = {
+    initialView,
+    state_weekend,
+    state_navLinks,
+    state_selectable,
+    state_editable,
+  };
 
   const customButtons: TcustomButtons = {
     debug: {
@@ -39,7 +54,7 @@ export default function Page() {
     showStateOptions: {
       text: "ShowOptions",
       click(ev, element) {
-        ref_modal_selectviews.current?.showModal();
+        ref_modal_options.current?.showModal();
       },
     },
     addEventNow: {
@@ -64,37 +79,11 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <dialog ref={ref_modal_selectviews}>
-        <h2>Options</h2>
-        <div>
-          <label>
-            View:{" "}
-            <SelectViews
-              ref_calendar={ref_calendar}
-              initialView={initialView}
-            />
-          </label>
-        </div>
-        <ToggleState label="Weekends" value={weekends} change={setWeekends} />
-        <ToggleState label="NavLinks" value={navLinks} change={setNavLinks} />
-        <ToggleState
-          label="Selectable"
-          value={selectable}
-          change={setSelectable}
-        />
-        <ToggleState label="Editable" value={editable} change={setEditable} />
-        <div>
-          <button
-            onClick={() => {
-              ref_modal_selectviews.current?.close();
-            }}
-            style={{ border: "1px red solid" }}
-          >
-            Close
-          </button>
-        </div>
-      </dialog>
+    <Context.Provider value={state_options}>
+      <ModalOptions
+        ref_modal_options={ref_modal_options}
+        ref_calendar={ref_calendar}
+      />
       <FullCalendar_react
         plugins={plugins}
         ref={ref_calendar}
@@ -108,6 +97,6 @@ export default function Page() {
         customButtons={customButtons}
         headerToolbar={headerToolbar}
       />
-    </div>
+    </Context.Provider>
   );
 }
