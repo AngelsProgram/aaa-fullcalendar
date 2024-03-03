@@ -28,8 +28,8 @@ export default function Page() {
   const ref_modal_eventInput = React.useRef<HTMLDialogElement>(null!);
 
   const state_weekend = React.useState(true);
-  const state_navLinks = React.useState(false);
-  const state_selectable = React.useState(true);
+  const state_navLinks = React.useState(true);
+  const state_selectable = React.useState(false);
   const state_editable = React.useState(false);
 
   const [weekends] = state_weekend;
@@ -37,7 +37,7 @@ export default function Page() {
   const [selectable] = state_selectable;
   const [editable] = state_editable;
 
-  const initialView: T_view = "timeGridDay"; // "dayGridMonth";
+  const initialView: T_view = "dayGridMonth";
 
   const state_options = {
     initialView,
@@ -96,11 +96,6 @@ export default function Page() {
         ref_modal_addevent.current?.showModal();
       },
     },
-    addEventNow: {
-      text: "AddEventNow",
-    },
-    addEventInput: {},
-    addEventRange: {},
     addEventDrag: {},
   };
 

@@ -4,7 +4,7 @@ import Fullcalendar_react from "@fullcalendar/react";
 import { Context } from "../context";
 
 // import { SelectViews, ToggleState } from "./components";
-import { SelectViews } from "./SelectView";
+import { SelectViews } from "./";
 import { ToggleState } from "./ToggleState";
 
 type T_props = {
