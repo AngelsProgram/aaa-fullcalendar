@@ -1,6 +1,6 @@
 {
   "name": "@aaa-project-full/aaa-fullcalendar",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Full Calendar and Events.",
   "main": "index.js",
   "keywords": [
@@ -16,9 +16,12 @@
     "@fullcalendar/icalendar": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/list": "^6.1.10",
+    "@fullcalendar/moment": "^6.1.11",
+    "@fullcalendar/moment-timezone": "^6.1.11",
     "@fullcalendar/multimonth": "^6.1.10",
     "@fullcalendar/react": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
+    "moment": "^2.30.1",
     "zod": "^3.22.4",
     "zzzzz-last-dependencies": "github:AngelsProgram/zzzzz-last-dependency#install"
   },

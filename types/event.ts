@@ -26,7 +26,7 @@ type T_Event = {
 
 type T_EventSimple = T_Event & {
   start: Fullcalendar_core.DateInput;
-  end?: Fullcalendar_core.DateInput;
+  end: Fullcalendar_core.DateInput;
 };
 
 type T_IndexWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
