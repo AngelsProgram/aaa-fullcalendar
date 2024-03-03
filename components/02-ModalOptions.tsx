@@ -1,7 +1,7 @@
 import React from "react";
 import Fullcalendar_react from "@fullcalendar/react";
 
-import { Context } from "../context";
+import { ContextModal, ContextState } from "../context";
 
 // import { SelectViews, ToggleState } from "./components";
 import { SelectViews } from "./";
@@ -13,7 +13,7 @@ type T_props = {
 };
 
 function ModalOptions(props: T_props) {
-  const context_options = React.useContext(Context);
+  const context_options = React.useContext(ContextState);
   if (!context_options) return;
 
   const initialView = context_options.initialView;

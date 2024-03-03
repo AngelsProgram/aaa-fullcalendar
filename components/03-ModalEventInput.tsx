@@ -6,7 +6,7 @@ type T_props = {
   ref_modal_eventInput: React.MutableRefObject<HTMLDialogElement>;
 };
 
-function ModalEvent(props: T_props) {
+function ModalEventInput(props: T_props) {
   return (
     <dialog ref={props.ref_modal_eventInput}>
       <h1>Add Event</h1>
@@ -50,4 +50,4 @@ function ModalEvent(props: T_props) {
   );
 }
 
-export { ModalEvent };
+export { ModalEventInput };
