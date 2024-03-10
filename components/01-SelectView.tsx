@@ -16,7 +16,6 @@ function SelectViews(props: T_props) {
     try {
       const parsed = schema_view.parse(event.target.value);
       if (parsed) {
-        console.log(parsed);
         props.ref_calendar.current?.getApi().changeView(parsed);
         // const current = props.ref_calendar.current?.getApi().view.type;
         setViewValue((previsou) => parsed);
