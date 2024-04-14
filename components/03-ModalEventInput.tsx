@@ -37,6 +37,20 @@ function ModalEventInput(props: T_props) {
             Time end: <input type="time" name="time_end" id="time_end" />
           </label>
         </div>
+        <div>
+          <label htmlFor="">
+            Days:{" "}
+            <select>
+              <option value=""></option>
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thuesday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+            </select>
+          </label>
+        </div>
         <input type="submit" value="Submit" />
       </form>
       <button

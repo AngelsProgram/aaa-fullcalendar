@@ -1,3 +1,5 @@
+import zod from "zod";
+
 /**
  * @link FullCalendar_core.EventInput
  * @link Fullcalendar_core.EventSourceInput
@@ -12,37 +14,38 @@ type T_Display =
   | "inverse-background"
   | "none";
 
-type T_Event = {
-  title?: string;
-  allDay?: boolean; // infer
+const T_Event = zod.z.object({
+  title: zod.z.string().optional(),
+  allDay: zod.z.boolean().optional(), //infer if the date contain only YYYY-MM-DD and goes not contain HH:mm:ss
+  groupId: zod.z.string().or(zod.z.number()).optional(),
+  constraint: zod.z.string().or(zod.z.number()).optional(), // groupId
   /**
    * Change both 'backgroundColor' and 'textColor'
    * @example colorName, #Hexadecimal, rgb(255, 255, 255)
    */
-  color?: string;
-  groupId?: string | number;
-  constraint?: string; // "groupID";
-};
+  color: zod.z
+    .string()
+    .or(zod.z.string().regex(/^#(?:[0-9a-fA-F]{3}){1,2}$/))
+    .or(zod.z.string().regex(/^rgb\(\)/)),
+});
 
-type T_EventSimple = T_Event & {
-  start: Fullcalendar_core.DateInput;
-  end: Fullcalendar_core.DateInput;
-};
+const T_EventSimple = T_Event.extend({
+  start: zod.z.date(),
+  end: zod.z.date().optional(),
+});
 
-type T_IndexWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-
-type T_EventRecursive = T_Event & {
-  groupId?: string | number;
-  daysOfWeek?: T_IndexWeek[];
-  startRecur?: Fullcalendar_core.DateInput;
-  endRecur?: Fullcalendar_core.DateInput;
-  startTime?: Fullcalendar_core.DateInput;
-  endTime?: Fullcalendar_core.DateInput;
-};
+const T_EventRecursive = T_Event.extend({
+  daysOfWeek: zod.z.enum(["0", "1", "2", "3", "4", "5", "6", "7"]),
+  startRecur: zod.z.date().optional(),
+  endRecur: zod.z.date().optional(),
+  startTime: zod.z.date().optional(),
+  endTime: zod.z.date().optional(),
+});
 
 type T_EventDraggable = {
   starTime: Fullcalendar_core.DateInput;
   duration: Fullcalendar_core.Duration; // default 1 hour
 };
 
-export type { T_Event, T_EventSimple, T_EventRecursive, T_EventDraggable };
+export { T_Event, T_EventSimple, T_EventRecursive };
+export type { T_EventDraggable };

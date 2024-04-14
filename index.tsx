@@ -5,7 +5,7 @@ import Fullcalendar_core from "@fullcalendar/core";
 import FullCalendar_react from "@fullcalendar/react";
 
 import { Fullcalendar } from "./src/FullCalendar";
-import { ContextModal, ContextState } from "./context";
+import { ContextModal, ContextState, ContextEvents } from "./context";
 import { ModalOptions, ModalAddEvent, ModalEventInput } from "./components";
 
 import type { T_view } from "./types";
@@ -22,6 +22,8 @@ export default function Page() {
   const state_editable = React.useState(false);
 
   const initialView: T_view = "dayGridMonth";
+
+  const state_events = React.useState<Fullcalendar_core.EventSourceInput>([]);
 
   const state_options = {
     initialView,
@@ -41,13 +43,15 @@ export default function Page() {
   return (
     <ContextModal.Provider value={modals}>
       <ContextState.Provider value={state_options}>
-        <ModalOptions
-          ref_modal_options={ref_modal_options}
-          ref_calendar={ref_calendar}
-        />
-        <ModalEventInput ref_modal_eventInput={ref_modal_eventInput} />
-        <ModalAddEvent ref_modal_addevent={ref_modal_addevent} />
-        <Fullcalendar />
+        <ContextEvents.Provider value={state_events}>
+          <ModalOptions
+            ref_modal_options={ref_modal_options}
+            ref_calendar={ref_calendar}
+          />
+          <ModalEventInput ref_modal_eventInput={ref_modal_eventInput} />
+          <ModalAddEvent ref_modal_addevent={ref_modal_addevent} />
+          <Fullcalendar />
+        </ContextEvents.Provider>
       </ContextState.Provider>
     </ContextModal.Provider>
   );

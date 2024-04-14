@@ -2,7 +2,7 @@ import React from "react";
 import Fullcalendar_react from "@fullcalendar/react";
 import Fullcalendar_core from "@fullcalendar/core";
 
-import { ContextModal } from "../context";
+import { ContextModal, ContextEvents } from "../context";
 
 import moment from "moment";
 
@@ -16,13 +16,17 @@ type T_props = {
 
 function ModalAddEvent(props: T_props) {
   const modals = React.useContext(ContextModal);
+  const contextEvents = React.useContext(ContextEvents);
 
   function addEventNow(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     try {
-      const api_calendar = modals?.ref_calendar.current?.getApi();
-      if (!api_calendar) return;
+      // const api_calendar = modals?.ref_calendar.current?.getApi();
+      // if (!api_calendar) return;
+      if (!contextEvents) return;
       const event = { title: "Example_Event_Current", start: new Date() };
-      api_calendar.addEvent(event);
+      const [events, setEvents] = contextEvents;
+      setEvents((previous) => [...previous, event]);
+      // api_calendar.addEvent(event);
     } catch (error) {}
   }
 
@@ -32,6 +36,7 @@ function ModalAddEvent(props: T_props) {
     try {
       const api_calendar = modals?.ref_calendar.current?.getApi();
       if (!api_calendar) return;
+      if (!contextEvents) return;
       const range = (api_calendar as any)?.currentData?.dateSelection?.range;
       const { start, end } = range;
       if (!(start || end)) return;
@@ -40,7 +45,9 @@ function ModalAddEvent(props: T_props) {
         start: toUtc(start),
         end: toUtc(end),
       };
-      api_calendar?.addEvent(event);
+      // api_calendar?.addEvent(event);
+      const [events, setEvents] = contextEvents;
+      setEvents((previous) => [...previous, event]);
     } catch (error) {}
   }
   return (

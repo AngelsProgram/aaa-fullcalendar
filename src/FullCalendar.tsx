@@ -5,7 +5,7 @@ import Fullcalendar_core from "@fullcalendar/core";
 import moment from "moment";
 
 import { plugins, headerToolbar, eventClick } from "../config";
-import { ContextState, ContextModal } from "../context";
+import { ContextState, ContextModal, ContextEvents } from "../context";
 
 type TcustomButtons = {
   [name: string]: Fullcalendar_core.CustomButtonInput;
@@ -14,6 +14,9 @@ type TcustomButtons = {
 function Fullcalendar() {
   const contextstate = React.useContext(ContextState);
   const contextmodal = React.useContext(ContextModal);
+  const contextEvents = React.useContext(ContextEvents);
+
+  const events = contextEvents ? contextEvents[0] : [];
 
   const customButtons: TcustomButtons = {
     debug: {
@@ -73,6 +76,7 @@ function Fullcalendar() {
       customButtons={customButtons}
       headerToolbar={headerToolbar}
       eventClick={eventClick}
+      events={events}
     />
   );
 }
