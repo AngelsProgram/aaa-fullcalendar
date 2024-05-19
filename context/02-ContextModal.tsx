@@ -12,4 +12,5 @@ type T_props =
 
 const ContextModal = React.createContext<T_props>(undefined);
 
+export type { T_props };
 export { ContextModal };

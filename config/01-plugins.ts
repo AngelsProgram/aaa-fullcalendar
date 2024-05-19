@@ -12,6 +12,10 @@ import plugin_timezone from "@fullcalendar/moment-timezone";
 import plugin_googlecalendar from "@fullcalendar/google-calendar";
 import plugin_icalendar from "@fullcalendar/icalendar";
 
+// import plugin_scrollgrid from "@fullcalendar/scrollgrid";
+// import plugin_bootstrap from "@fullcalendar/bootstrap5";
+// import plugin_rule from '@fullcalendar/rrule';
+
 const plugins_views: Fullcalendar_core.PluginDef[] = [
   plugin_multimonth,
   plugin_daygrid,
